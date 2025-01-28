@@ -13,7 +13,9 @@ class IncomeTransaction(BaseTransaction):
 
 
 class CreditIncomeTransaction(IncomeTransaction):
-    pass
+    @staticmethod
+    def credit(balance, amount):
+        return balance + amount
 
 
 class ExpensesTransaction(BaseTransaction):

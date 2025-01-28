@@ -17,6 +17,9 @@ class View:
         self.expense_button = tk.Button(self.root, text='Добавить расход', command=self.add_expense)
         self.expense_button.pack()
 
+        self.expense_button = tk.Button(self.root, text='Взять кредит', command=self.take_credit)
+        self.expense_button.pack()
+
     def add_income(self):
         self.controller.process_income(100, 'Тест_доход_100')
         self.update_balance()
@@ -27,6 +30,10 @@ class View:
             self.update_balance()
         except ValueError as e:
             print(str(e))
+
+    def take_credit(self):
+        self.controller.process_credit(20, 'Тест_кредит_20')
+        self.update_balance()
 
     def update_balance(self):
         self.balance_label.config(text=f'Баланс: {self.controller.get_balance()}')
