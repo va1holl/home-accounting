@@ -34,3 +34,11 @@ class PositiveNumberValidator(IntegerValidator):
         if number <= 0:
             raise ValueError("Ошибка: Введите положительное число.")
         return number
+
+
+class CommentValidator(Validator):
+    """Валидатор для комментариев"""
+    def validate(self, comment):
+        if not (5 <= len(comment) <= 60):
+            raise ValueError("Комментарий должен иметь от 5 до 60 символов!")
+        return comment
