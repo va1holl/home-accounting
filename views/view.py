@@ -1,12 +1,15 @@
 import tkinter as tk
+from wsgiref.validate import validator
+
 from controllers.controller import Controller
-from utils.validator import IntegerValidator, PositiveNumberValidator
+from utils.validator import PositiveNumberValidator, CommentValidator
 
 
 class View:
     def __init__(self):
         self.controller = Controller()
         self.validator = PositiveNumberValidator()
+        self.comm_validator = CommentValidator()
         self.root = tk.Tk()
         self.root.title("Домашняя бухгалтерию")
         self.x = self.root.winfo_screenwidth()
@@ -16,8 +19,17 @@ class View:
         self.balance_label = tk.Label(self.root, text=f'Баланс: {self.controller.get_balance()}')
         self.balance_label.pack()
 
+        self.label_entry = tk.Label(self.root, text='Сумма')
+        self.label_entry.pack()
+
         self.entry_amount = tk.Entry(self.root)
         self.entry_amount.pack()
+
+        self.label_entry = tk.Label(self.root, text='Комментарий')
+        self.label_entry.pack()
+
+        self.entry_comment = tk.Entry(self.root, name='comment')
+        self.entry_comment.pack()
 
         self.income_button = tk.Button(self.root, text='Добавить прибыль', command=self.add_income)
         self.income_button.pack()
@@ -30,21 +42,27 @@ class View:
 
     def add_income(self):
         try:
-            self.controller.process_income(PositiveNumberValidator.validate(self.validator, self.entry_amount.get()), 'Тест_доход_100')
+            comment = self.comm_validator.validate(self.entry_comment.get())
+            self.controller.process_income(PositiveNumberValidator.validate(self.validator, self.entry_amount.get()),
+                                           comment)
             self.update_balance()
         except ValueError as e:
             print(str(e))
 
     def add_expense(self):
         try:
-            self.controller.process_expense(PositiveNumberValidator.validate(self.validator, self.entry_amount.get()), 'Тест_расход_50')
+            comment = self.comm_validator.validate(self.entry_comment.get())
+            self.controller.process_expense(PositiveNumberValidator.validate(self.validator, self.entry_amount.get()),
+                                            comment)
             self.update_balance()
         except ValueError as e:
             print(str(e))
 
     def take_credit(self):
         try:
-            self.controller.process_credit(PositiveNumberValidator.validate(self.validator, self.entry_amount.get()), 'Тест_кредит_20')
+            comment = self.comm_validator.validate(self.entry_comment.get())
+            self.controller.process_credit(PositiveNumberValidator.validate(self.validator, self.entry_amount.get()),
+                                           comment)
             self.update_balance()
         except ValueError as e:
             print(str(e))
