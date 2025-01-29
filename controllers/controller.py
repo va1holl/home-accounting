@@ -3,6 +3,7 @@ from models.transaction import IncomeTransaction, ExpensesTransaction, CreditInc
 
 
 class Controller:
+    """Класс контроллера для связи Model и View приложения"""
     def __init__(self, initial_balance=0):
         self.account = Account(initial_balance)
 

@@ -6,6 +6,7 @@ from utils.validator import PositiveNumberValidator, CommentValidator
 
 
 class View:
+    """Класс для отображения окна приложения"""
     def __init__(self):
         self.controller = Controller()
         self.validator = PositiveNumberValidator()
