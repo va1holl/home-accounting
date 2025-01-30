@@ -1,5 +1,5 @@
 from models.transaction import BaseTransaction
-from utils.balance_loader import BalanceLoader
+from utils.loaders import BalanceLoader
 from utils.logger import DataBaseLogger
 
 
