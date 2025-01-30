@@ -17,7 +17,6 @@ class BalanceLoader(Loader):
 class HistoryLoader(Loader):
     """Класс для загрузки последних транзакций"""
     def load_history(self):
-        sql = "SELECT * FROM accounting_logger"
+        sql = "SELECT * FROM accounting_logger ORDER BY date DESC LIMIT 10"
         data = self.db.select(sql)
-        history = data[-10:]
-        return history
+        return data
