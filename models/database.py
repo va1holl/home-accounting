@@ -28,13 +28,14 @@ class DataBase:
 
 
 class DataBaseSelect(DataBase):
-    def select(self):
+    def select(self, sql):
         """ Метод для получения данных из базы данных """
         conn = super().connect()
         if conn is not None:
             try:
                 cursor = conn.cursor()
-                cursor.execute("SELECT * FROM accounting_logger")
+
+                cursor.execute(sql)
                 results = cursor.fetchall()
                 return results
             except Exception as e:
