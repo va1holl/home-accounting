@@ -37,6 +37,8 @@ class DataBaseSelect(DataBase):
 
                 cursor.execute(sql)
                 results = cursor.fetchall()
+                if results == '':
+                    return None
                 return results
             except Exception as e:
                 print(f"Ошибка выполнения запроса: {e}")
