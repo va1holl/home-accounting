@@ -74,7 +74,6 @@ class View:
             sql=f"SELECT * FROM accounting_logger WHERE date BETWEEN '{self.start_date.get()}' and '{self.end_date.get()}'")
             )
         self.transaction_history.delete("1.0", tk.END)
-
         if transactions == None:
             print('За данную дату транзакций нет!')
         else:
